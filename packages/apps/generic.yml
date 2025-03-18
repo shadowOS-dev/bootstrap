@@ -12,6 +12,5 @@ packages:
   revision: 1
   build:
   - args: [ 'bash', '@THIS_SOURCE_DIR@/init/build.sh' ]
-  install:
   - args: [ 'mkdir', '-p', '@THIS_COLLECT_DIR@/bin' ]
   - args: [ 'cp', '@THIS_SOURCE_DIR@/init/init', '@THIS_COLLECT_DIR@/bin' ]
