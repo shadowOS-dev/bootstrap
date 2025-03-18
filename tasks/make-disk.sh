@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Example usage: ./make-image.sh shadowOS.iso ramfs.img system-root
 IMAGE_NAME="$1"
 INITRAMFS_PATH="$2"
 SYSROOT="$3"
