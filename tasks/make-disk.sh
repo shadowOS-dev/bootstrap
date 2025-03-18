@@ -32,6 +32,3 @@ xorriso -as mkisofs -R -r -J -b boot/limine-bios.sys \
 
 # Install limine bios thingy
 $SYSROOT/usr/bin/limine bios-install $IMAGE_NAME
-
-# Install limine on the final image
-$SYSROOT/usr/bin/limine bios-install $IMAGE_NAME
