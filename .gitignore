@@ -8,3 +8,7 @@ packages/*.collect
 pkg-builds/
 system-root/
 packages/base
+*.img
+*.iso
+ports/
+packages/limine

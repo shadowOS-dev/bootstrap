@@ -1,0 +1,41 @@
+sources:
+- name: limine
+  subdir: 'ports'
+  git: 'https://github.com/limine-bootloader/limine.git'
+  tag: 'v9.2.0'
+  version: '9.2.0'
+  # tools_required:
+  # - host-autoconf
+  # - host-automake
+  # - host-libtool
+  regenerate:
+  - args: [ '@SOURCE_ROOT@/support/autoreconf.sh', '-I@THIS_SOURCE_DIR@/config' ]
+  - args: [ './bootstrap' ]
+    isolate_network: false
+
+packages:
+- name: limine
+  labels: [ x86_64 ]
+  architecture: 'x86_64'
+  from_source: limine
+  # tools_required:
+  # - host-binutils
+  # - host-gcc
+  configure:
+  - args: |
+      do_config () {
+        '@THIS_SOURCE_DIR@/configure' \
+        '--prefix=/usr' \
+        "$@"
+      }
+      do_config --enable-uefi-x86-64 --enable-bios
+  build:
+  - args: [ 'make', '-j@PARALLELISM@' ]
+  - args: [ 'make', 'install' ]
+    environ:
+      DESTDIR: '@THIS_COLLECT_DIR@'
+  - args: [ 'mkdir', '-p', '@THIS_COLLECT_DIR@/boot/' ]
+  - args: [ 'cp', '@SOURCE_ROOT@/extras/limine/limine.conf', '@THIS_COLLECT_DIR@/boot/limine.conf' ]
+  - args: [ 'mkdir', '-p', '@THIS_COLLECT_DIR@/boot/EFI/BOOT/' ]
+  - args: [ 'cp', '-r', '@THIS_COLLECT_DIR@/usr/share/limine/.', '@THIS_COLLECT_DIR@/boot/EFI/BOOT/' ]
+  - args: [ 'mv', '@THIS_COLLECT_DIR@/boot/EFI/BOOT/limine-bios.sys', '@THIS_COLLECT_DIR@/boot/' ]

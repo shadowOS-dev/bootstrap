@@ -1,2 +1,3 @@
 imports:
   - file: kernel/base.yml
+  - file: kernel/limine.yml
