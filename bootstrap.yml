@@ -1,6 +1,5 @@
 imports:
   - file: packages/kernel.yml
-  - file: tasks/tasks.yml
 general:
   patch_author: Kevin Alavik and contributors
   patch_email: kevin@alavik.se
