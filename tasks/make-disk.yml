@@ -5,5 +5,6 @@ tasks:
   - '@BUILD_ROOT@/shadowOS.iso'
   - '@BUILD_ROOT@/ramfs.img'
   - '@SYSROOT_DIR@/'
+  - '@SOURCE_ROOT@/'
   workdir: '@BUILD_ROOT@'
   containerless: true

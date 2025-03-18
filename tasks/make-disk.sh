@@ -1,10 +1,11 @@
 #!/bin/bash
-set -xe
+set -e
 
 # Example usage: ./make-image.sh shadowOS.iso ramfs.img system-root
 IMAGE_NAME="$1"
 INITRAMFS_PATH="$2"
 SYSROOT="$3"
+ROOT="$4"
 
 # Validate arguments
 if [[ -z "$IMAGE_NAME" || -z "$INITRAMFS_PATH" || -z "$SYSROOT" ]]; then
@@ -21,6 +22,7 @@ TEMP=$(mktemp -d)
 pushd "$TEMP"
 mkdir -p boot
 cp -vr "$SYSROOT/boot" .
+cp -vr "$ROOT/extras/limine/limine.conf" boot/
 cp -vr "$INITRAMFS_PATH" boot/ramfs.img
 
 # Download and build Limine in TEMP if not present
