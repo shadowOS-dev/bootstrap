@@ -1,5 +1,6 @@
 imports:
   - file: packages/kernel.yml
+  - file: packages/apps.yml
 general:
   patch_author: Kevin Alavik and contributors
   patch_email: kevin@alavik.se
