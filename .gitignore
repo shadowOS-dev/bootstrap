@@ -1,0 +1,10 @@
+build/
+bootstrap-site.yml
+bootstrap.link
+sources/
+packages/*.collect
+.xbstrap/
+.env/
+pkg-builds/
+system-root/
+packages/base

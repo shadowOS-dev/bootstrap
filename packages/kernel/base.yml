@@ -1,0 +1,24 @@
+sources:
+- name: shadow
+  subdir: sources
+  git: 'https://github.com/shadowOS-dev/shadowOS.git'
+  branch: main
+  submodules: false
+  rolling_version: true
+  version: '0.0pl@ROLLING_ID@'
+
+packages:
+- name: base
+  labels: [ x86_64 ]
+  from_source: shadow
+  revision: 1
+  build:
+  - args:
+    - 'bash'
+    - '@THIS_SOURCE_DIR@/kernel/get-deps'
+  - args:
+    - 'make'
+    - '-C'
+    - '@THIS_SOURCE_DIR@/kernel'
+  - args: [ 'mkdir', '-p', '@THIS_COLLECT_DIR@/boot' ]
+  - args: [ 'cp', '@THIS_SOURCE_DIR@/kernel/bin/shadow', '@THIS_COLLECT_DIR@/boot']

@@ -1,0 +1,8 @@
+imports:
+  - file: packages/kernel.yml
+general:
+  patch_author: Kevin Alavik and contributors
+  patch_email: kevin@alavik.se
+  everything_by_default: true
+  mandate_hashes_for_archives: true
+  enable_network_isolation: true
