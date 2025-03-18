@@ -21,5 +21,6 @@ packages:
     - 'make'
     - '-C'
     - '@THIS_SOURCE_DIR@/kernel'
+  install:
   - args: [ 'mkdir', '-p', '@THIS_COLLECT_DIR@/boot' ]
   - args: [ 'cp', '@THIS_SOURCE_DIR@/kernel/bin/shadow', '@THIS_COLLECT_DIR@/boot']
