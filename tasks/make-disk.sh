@@ -22,13 +22,19 @@ pushd "$TEMP"
 mkdir -p boot
 cp -vr "$SYSROOT/boot" .
 cp -vr "$INITRAMFS_PATH" boot/ramfs.img
+
+# Download and build Limine in TEMP if not present
+if [[ ! -d "limine" ]]; then
+    git clone https://github.com/limine-bootloader/limine.git --branch=v8.x-binary --depth=1
+    make -C limine
+fi
+
 popd
+xorriso -as mkisofs -R -r -J -b limine/limine-bios.sys \
+        -no-emul-boot -boot-load-size 4 -boot-info-table -hfsplus \
+        -apm-block-size 2048 --efi-boot limine/BOOTX64.EFI \
+        -efi-boot-part --efi-boot-image --protective-msdos-label \
+        $TEMP -o $IMAGE_NAME
 
-xorriso -as mkisofs -R -r -J -b boot/limine-bios.sys \
-		-no-emul-boot -boot-load-size 4 -boot-info-table -hfsplus \
-		-apm-block-size 2048 --efi-boot boot/EFI/BOOT/BOOTX64.EFI \
-		-efi-boot-part --efi-boot-image --protective-msdos-label \
-		$TEMP -o $IMAGE_NAME
-
-# Install limine bios thingy
-$SYSROOT/usr/bin/limine bios-install $IMAGE_NAME
+# Install Limine BIOS bootloader
+$TEMP/limine/limine bios-install "$IMAGE_NAME"
