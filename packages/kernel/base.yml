@@ -6,7 +6,8 @@ sources:
   submodules: false
   rolling_version: true
   version: '0.0pl@ROLLING_ID@'
-
+  default: false
+  
 packages:
 - name: base
   labels: [ x86_64 ]
