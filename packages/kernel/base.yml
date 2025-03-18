@@ -6,10 +6,10 @@ sources:
   submodules: false
   rolling_version: true
   version: '0.0pl@ROLLING_ID@'
-  default: false
   
 packages:
 - name: base
+  default: false
   labels: [ x86_64 ]
   from_source: shadow
   revision: 1
