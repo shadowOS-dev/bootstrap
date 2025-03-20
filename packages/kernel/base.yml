@@ -11,6 +11,7 @@ packages:
 - name: base
   default: false
   labels: [ x86_64 ]
+  architecture: 'x86_64'
   from_source: shadow
   revision: 1
   build:

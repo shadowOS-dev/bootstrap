@@ -1,21 +1,28 @@
 sources:
-- name: app-src
-  subdir: sources
-  git: 'https://github.com/shadowOS-dev/app-src.git'
-  branch: main
-  submodules: false
+  - name: app-src
+    subdir: sources
+    git: 'https://github.com/shadowOS-dev/app-src.git'
+    branch: main
+    submodules: false
 
 packages:
-- name: init
-  labels: [ x86_64 ]
-  from_source: app-src
-  revision: 1
-  build:
-  - args:
-    - 'bash'
-    - '@THIS_SOURCE_DIR@/init/build.sh'
-    environ:
-      CC: 'x86_64-elf-gcc' # TODO: Change to shadowOS specific toolchain
-      LD: 'x86_64-elf-ld'  #
-  - args: [ 'mkdir', '-p', '@THIS_COLLECT_DIR@/bin' ]
-  - args: [ 'cp', '@THIS_SOURCE_DIR@/init/init', '@THIS_COLLECT_DIR@/bin' ]
+  - name: init
+    labels: [ x86_64 ]
+    architecture: 'x86_64'
+    from_source: app-src
+    revision: 1
+    build:
+      - args:
+          - 'bash'
+          - '@THIS_SOURCE_DIR@/init/build.sh'
+        environ:
+          CC: 'x86_64-elf-gcc'
+          LD: 'x86_64-elf-ld'
+      - args:
+          - 'mkdir'
+          - '-p'
+          - '@THIS_COLLECT_DIR@/bin'
+      - args:
+          - 'cp'
+          - '@THIS_SOURCE_DIR@/init/init'
+          - '@THIS_COLLECT_DIR@/bin'
